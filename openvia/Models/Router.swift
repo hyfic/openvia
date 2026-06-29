@@ -30,13 +30,8 @@ class Router: ObservableObject {
     }
     
     func route(url: URL) {
-        guard let host = url.host else {
-            openFallback(url: url)
-            return
-        }
-        
         for rule in rules {
-            if rule.matches(host: host) {
+            if rule.matches(url: url) {
                 if openWithBrowser(url: url, bundleId: rule.browserId) {
                     return
                 }

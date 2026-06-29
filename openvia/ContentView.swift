@@ -16,27 +16,51 @@ struct ContentView: View {
             List {
                 Section(header: Text("Rules (Evaluated top to bottom)")) {
                     ForEach($router.rules) { $rule in
-                        HStack {
-                            TextField("Pattern (e.g. *.company.com)", text: $rule.pattern)
-                                .textFieldStyle(.roundedBorder)
-                            
-                            Picker("", selection: $rule.browserId) {
-                                ForEach(browserManager.installedBrowsers) { browser in
-                                    Text(browser.name).tag(browser.bundleId)
+                        VStack(alignment: .leading, spacing: 8) {
+                            HStack {
+                                Picker("", selection: $rule.scheme) {
+                                    ForEach(Rule.URLSchemeMatch.allCases, id: \.self) { scheme in
+                                        Text(scheme.rawValue).tag(scheme)
+                                    }
                                 }
-                            }
-                            .frame(width: 150)
-                            
-                            Button(action: {
-                                if let index = router.rules.firstIndex(where: { $0.id == rule.id }) {
-                                    router.rules.remove(at: index)
+                                .frame(width: 110)
+                                
+                                Picker("", selection: $rule.patternType) {
+                                    ForEach(Rule.PatternType.allCases, id: \.self) { type in
+                                        Text(type.rawValue).tag(type)
+                                    }
                                 }
-                            }) {
-                                Image(systemName: "trash")
-                                    .foregroundColor(.red)
+                                .frame(width: 140)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    if let index = router.rules.firstIndex(where: { $0.id == rule.id }) {
+                                        router.rules.remove(at: index)
+                                    }
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(.red)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
+                            
+                            HStack {
+                                TextField("Pattern", text: $rule.pattern)
+                                    .textFieldStyle(.roundedBorder)
+                                
+                                Image(systemName: "arrow.right")
+                                    .foregroundColor(.secondary)
+                                    
+                                Picker("", selection: $rule.browserId) {
+                                    ForEach(browserManager.installedBrowsers) { browser in
+                                        Text(browser.name).tag(browser.bundleId)
+                                    }
+                                }
+                                .frame(width: 150)
+                            }
                         }
+                        .padding(.vertical, 4)
                     }
                     .onMove { source, destination in
                         router.rules.move(fromOffsets: source, toOffset: destination)
