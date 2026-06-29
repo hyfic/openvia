@@ -1,0 +1,251 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+
+:root {
+  --rosewater: #dc8a78;
+  --flamingo: #dd7878;
+  --pink: #ea76cb;
+  --mauve: #8839ef;
+  --red: #d20f39;
+  --maroon: #e64553;
+  --peach: #fe640b;
+  --yellow: #df8e1d;
+  --green: #40a02b;
+  --teal: #179299;
+  --sky: #04a5e5;
+  --sapphire: #209fb5;
+  --blue: #1e66f5;
+  --lavender: #7287fd;
+
+  --text: #4c4f69;
+  --subtext-1: #5c5f77;
+  --subtext-0: #6c6f85;
+
+  --overlay-2: #7c7f93;
+  --overlay-1: #8c8fa1;
+  --overlay-0: #9ca0b0;
+
+  --surface-2: #acb0be;
+  --surface-1: #bcc0cc;
+  --surface-0: #ccd0da;
+
+  --base: #eff1f5;
+  --mantle: #e6e9ef;
+  --crust: #dce0e8;
+
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: 'Satoshi', sans-serif;
+  background-color: var(--crust);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+main {
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (min-width: 640px) {
+  main {
+    padding: 2.5rem 0;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 36rem;
+  box-sizing: border-box;
+}
+
+/* Profile Section */
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+.cover {
+  width: 100%;
+  height: 15rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--surface-0);
+  border: 1px solid var(--surface-0);
+}
+@media (max-width: 639px) {
+  .cover {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+}
+/* @media (min-width: 640px) { .cover { height: 2rem; } } */
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.profile-info {
+  padding: 0 0.5rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.avatar-row {
+  margin-top: -3rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.avatar {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  border: 4px solid var(--crust);
+  background-color: var(--surface-0);
+  overflow: hidden;
+  position: relative;
+}
+/* @media (min-width: 640px) { .avatar { width: 8rem; height: 8rem; } } */
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.info-text .name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.info-text .description {
+  font-size: 0.875rem;
+  color: var(--subtext-0);
+  margin-top: 0.35rem;
+  line-height: 1.6;
+}
+
+/* Features Section */
+.features-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.blurred-content {
+  filter: blur(6px);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-left: 1.25rem;
+  margin: 0;
+}
+
+.feature-item {
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Download Overlay */
+.download-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -2.5rem;
+}
+
+.download-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.icon-box {
+  background-color: rgba(204, 208, 218, 0.6);
+  padding: 1rem;
+  border-radius: 50%;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--surface-1);
+  color: var(--text);
+  display: flex;
+}
+
+.download-btn {
+  background-color: var(--text);
+  color: var(--crust);
+  padding: 0.8rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.1s;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+.download-btn:hover {
+  background-color: var(--subtext-1);
+  transform: translateY(-1px);
+}
+.download-btn:active {
+  transform: translateY(0);
+}
+
+/* Footer Section */
+.footer {
+  width: 100%;
+  max-width: 38rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: var(--subtext-0);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--surface-0);
+  margin-top: 2rem;
+  box-sizing: border-box;
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: underline;
+}
