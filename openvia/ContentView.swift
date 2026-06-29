@@ -167,9 +167,6 @@ struct RulesView: View {
             Divider()
             
             HStack {
-                Button("Quit") {
-                    NSApplication.shared.terminate(nil)
-                }
                 Spacer()
                 Button("Set as Default Browser") {
                     let url = URL(string: "x-apple.systempreferences:com.apple.preference.general")!
@@ -189,6 +186,8 @@ struct AboutView: View {
                 Image(nsImage: appIcon)
                     .resizable()
                     .frame(width: 80, height: 80)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous)) // Smooth Apple-style corners
+
                     .shadow(color: .black.opacity(0.2), radius: 10, x: 0, y: 5)
             } else {
                 Image(systemName: "link.circle.fill")
