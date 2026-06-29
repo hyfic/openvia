@@ -85,7 +85,7 @@ struct RulesView: View {
                                 
                                 Button(action: {
                                     if let index = router.rules.firstIndex(where: { $0.id == rule.id }) {
-                                        withAnimation {
+                                        _ = withAnimation {
                                             router.rules.remove(at: index)
                                         }
                                     }
@@ -135,7 +135,7 @@ struct RulesView: View {
                     .listRowBackground(Color.clear)
                     
                     Button(action: {
-                        withAnimation {
+                        _ = withAnimation {
                             let defaultId = browserManager.defaultBrowser?.bundleId ?? "com.apple.Safari"
                             let newRule = Rule(pattern: "", browserId: defaultId)
                             router.rules.append(newRule)
