@@ -42,6 +42,24 @@ struct RulesView: View {
     
     var body: some View {
         VStack(spacing: 0) {
+            if !browserManager.isDefaultBrowser {
+                HStack {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.yellow)
+                    Text("OpenVia is not your default browser. It must be set as default to intercept links.")
+                        .font(.subheadline)
+                    Spacer()
+                    Button("Set Default") {
+                        let url = URL(string: "x-apple.systempreferences:com.apple.preference.general")!
+                        NSWorkspace.shared.open(url)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.small)
+                }
+                .padding()
+                .background(Color.yellow.opacity(0.15))
+            }
+            
             List {
                 Section(header: Text("Routing Rules").font(.headline).foregroundColor(.secondary)) {
                     ForEach($router.rules) { $rule in
@@ -165,16 +183,9 @@ struct RulesView: View {
             .scrollContentBackground(.hidden)
             
             Divider()
-            
-            HStack {
-                Spacer()
-                Button("Set as Default Browser") {
-                    let url = URL(string: "x-apple.systempreferences:com.apple.preference.general")!
-                    NSWorkspace.shared.open(url)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-            .padding()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            browserManager.refreshBrowsers()
         }
     }
 }

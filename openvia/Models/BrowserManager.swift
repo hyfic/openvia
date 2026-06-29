@@ -15,6 +15,7 @@ class BrowserManager: ObservableObject {
     
     @Published var installedBrowsers: [Browser] = []
     @Published var defaultBrowser: Browser?
+    @Published var isDefaultBrowser: Bool = false
     
     init() {
         refreshBrowsers()
@@ -49,8 +50,13 @@ class BrowserManager: ObservableObject {
         
         // Also get the current system default browser
         if let defaultURL = workspace.urlForApplication(toOpen: httpURL) {
-            if let bundleId = Bundle(url: defaultURL)?.bundleIdentifier, bundleId != ourBundleId {
-                self.defaultBrowser = browsers.first(where: { $0.bundleId == bundleId })
+            if let bundleId = Bundle(url: defaultURL)?.bundleIdentifier {
+                if bundleId == ourBundleId {
+                    self.isDefaultBrowser = true
+                } else {
+                    self.isDefaultBrowser = false
+                    self.defaultBrowser = browsers.first(where: { $0.bundleId == bundleId })
+                }
             }
         }
         
