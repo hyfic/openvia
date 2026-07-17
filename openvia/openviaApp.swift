@@ -24,6 +24,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         }
     }
     
+    func application(_ application: NSApplication, open urls: [URL]) {
+        openedViaURL = true
+        for url in urls {
+            Router.shared.route(url: url)
+        }
+    }
+    
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         // Called when user clicks the app icon in Dock or Finder while it's already running
         showSettings()
